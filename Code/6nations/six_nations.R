@@ -2,7 +2,7 @@ library(tidyverse)
 library(ggplot2)
 ### 6 nations example
 
-temp <- xml2::read_html('https://en.wikipedia.org/wiki/Ireland_national_rugby_union_team') %>%
+xml2::read_html('https://en.wikipedia.org/wiki/Ireland_national_rugby_union_team') %>%
   rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[8]/tbody/tr/td/table') %>%
   rvest::html_table(fill = TRUE) %>%
   purrr::pluck(1) %>%
@@ -25,7 +25,7 @@ xml2::read_html('https://en.wikipedia.org/wiki/England_national_rugby_union_team
 
 ### Error?
 
-details <- dplyr::as_tibble(list(names = c('Irish', 'England', 'French', 'Welsh', 'Scottish', 'Italy'),
+details <- tibble::as_tibble(list(names = c('Irish', 'England', 'French', 'Welsh', 'Scottish', 'Italy'),
                                  table_no = c('8','9','8','5','9','16'),
                                  short_name = c('IRE','ENG','FRA','WAL','SCO','ITA')))
 
@@ -52,6 +52,9 @@ for(ii in 1:6){
   df <- scraper_team(df,details$names[ii],details$table_no[ii],details$short_name[ii])
   print(ii/6)
 }  
+
+df %>% head()
+df %>% tail()
 
 ### example analysis
 
