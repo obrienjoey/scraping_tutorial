@@ -62,7 +62,7 @@ df %>% group_by(Nation, Position) %>%
   scale_fill_brewer(palette = "Set1") +
   ylab('') +
   ggtitle('Average Caps by Position') +
-  theme(plot.title.position = 'plot',
+  theme(
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
@@ -74,6 +74,6 @@ df %>% group_by(Nation) %>%
   ylab('') +
   theme_minimal() +
   ggtitle('Average Age for Each Team') +
-  theme(plot.title.position = 'plot',
+  theme(
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
