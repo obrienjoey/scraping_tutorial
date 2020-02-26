@@ -12,6 +12,7 @@ reddit_wbpg %>%
   rvest::html_node('title') %>%
   rvest::html_text()
 
+# let's get the comments
 reddit_wbpg %>% 
   rvest::html_nodes('p._1qeIAgB0cPwnLhDF9XSiJM') %>%
   rvest::html_text()
@@ -20,14 +21,14 @@ reddit_wbpg %>%
 reddit_ireland <- xml2::read_html('https://www.reddit.com/r/ireland/new/')
 ## their times
 times <- reddit_ireland %>%
-  html_nodes('a._3jOxDPIQ0KaOWpzvSQo-1s') %>%
-  html_text()
+  rvest::html_nodes('a._3jOxDPIQ0KaOWpzvSQo-1s') %>%
+  rvest::html_text()
 
 times
 ## their urls
 urls <- reddit_ireland %>%
-    html_nodes('a._3jOxDPIQ0KaOWpzvSQo-1s') %>%
-    html_attr('href')
+    rvest::html_nodes('a._3jOxDPIQ0KaOWpzvSQo-1s') %>%
+    rvest::html_attr('href')
   
 urls
 
@@ -40,16 +41,16 @@ titles <- c()
 comments <- c()
 for(page in ire_recent$Pages){
   
-  reddit_temp_data <- read_html(page)
+  reddit_temp_data <- xml2::read_html(page)
   body <- reddit_temp_data %>% 
-    html_nodes('p._1qeIAgB0cPwnLhDF9XSiJM') %>%
-    html_text()
+    rvest::html_nodes('p._1qeIAgB0cPwnLhDF9XSiJM') %>%
+    rvest::html_text()
     
   comments = append(comments, body)
   
   title <- reddit_temp_data %>%
-    html_node("title") %>%
-    html_text()
+    rvest::html_node("title") %>%
+    rvest::html_text()
   titles = append(titles, rep(title,each=length(body)))
   
 }
