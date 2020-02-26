@@ -45,7 +45,8 @@ reddit_ireland_scraper <- function(url){
 reddit_ireland_scraper('https://www.reddit.com/r/ireland/new/') %>%
   save(., file = file_name)
 
-ireland_today <- reddit_ireland_scraper('https://www.reddit.com/r/ireland/new/')
+load(file_name)
+ireland_today <- reddit_ire_hour
 ireland_today %>% head()
 library(sentimentr)
 scores <- sentimentr::sentiment(ireland_today$Comments) %>% head()

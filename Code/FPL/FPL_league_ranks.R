@@ -1,3 +1,4 @@
+library(tidyverse)
 ### make a fantasy table from details
 
 temp <- jsonlite::fromJSON('https://fantasy.premierleague.com/api/leagues-classic//904977/standings/') %>%
@@ -52,4 +53,4 @@ ggplot(df, aes(x = GW, y = rank)) +
         axis.title.x = element_text(hjust=0.375),
         plot.title = element_text(face = 'bold'))
 
-ggsave('MACSI_ranks.jpeg', width = 6, height = 4, units = 'in', dpi = 400)
+ggsave('Output/FPL/MACSI_ranks.jpeg', width = 6, height = 4, units = 'in', dpi = 400)
