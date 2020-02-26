@@ -12,6 +12,19 @@ temp <- xml2::read_html('https://en.wikipedia.org/wiki/Ireland_national_rugby_un
                 Nation = rep('IRE', nrow(.))) %>%
   dplyr::select(-c(DOB))
 
+### okay let's do the English team now
+xml2::read_html('https://en.wikipedia.org/wiki/England_national_rugby_union_team') %>%
+  rvest::html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[8]/tbody/tr/td/table') %>%
+  rvest::html_table(fill = TRUE) %>%
+  purrr::pluck(1) %>%
+  dplyr::as_tibble() %>%
+  dplyr::rename('DOB' = `Date of birth (age)`, 'Club' = `Club/province`) %>%
+  dplyr::mutate(Age = as.integer(substr(DOB, nchar(DOB)-2, nchar(DOB)-1)),
+                Nation = rep('IRE', nrow(.))) %>%
+  dplyr::select(-c(DOB))
+
+### Error?
+
 details <- dplyr::as_tibble(list(names = c('Irish', 'England', 'French', 'Welsh', 'Scottish', 'Italy'),
                                  table_no = c('8','9','8','5','9','16'),
                                  short_name = c('IRE','ENG','FRA','WAL','SCO','ITA')))
