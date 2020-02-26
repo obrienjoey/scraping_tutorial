@@ -1,2 +1,1 @@
-# scraping_tutorial
-Files needed for scraping tutorial for UL Statistics Group.
+Code and slides used during the statistics tutorial on webscraping with R.
